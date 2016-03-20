@@ -1,0 +1,54 @@
+#cloud-config
+
+write_files:
+  - path: /home/core/get-release.sh
+    permissions: 0755
+    content: |
+      #!/bin/sh
+
+      aws_access_key_id=`curl http://169.254.169.254/latest/meta-data/iam/security-credentials/${iam_role} | grep AccessKeyId | cut -d':' -f2 | sed 's/[^0-9A-Z]*//g'`
+      aws_secret_access_key=`curl http://169.254.169.254/latest/meta-data/iam/security-credentials/${iam_role} | grep SecretAccessKey | cut -d':' -f2 | sed 's/[^0-9A-Za-z/+=]*//g'`
+      token=`curl -s http://169.254.169.254/latest/meta-data/iam/security-credentials/${iam_role} | sed -n '/Token/{p;}' | cut -f4 -d'"'`
+
+      date="`date +'%a, %d %b %Y %H:%M:%S %z'`"
+      resource="/${bucket}/pinglist-api/${release}.tar.gz"
+      signature_string="GET\n\n\n$date\nx-amz-security-token:$token\n/$resource"
+      signature=`/bin/echo -en "$signature_string" | openssl sha1 -hmac $aws_secret_access_key -binary | base64`
+      authorization="AWS $aws_access_key_id:$signature"
+
+      curl -s -H "Date: $date" -H "X-AMZ-Security-Token: $token" -H "Authorization: $authorization" "https://s3-${region}.amazonaws.com/$resource"
+
+coreos:
+  units:
+    - name: get-release.service
+      command: start
+      content: |
+        [Unit]
+        Description=Downloads the pinglist API container
+        After=docker.service
+        Requires=docker.service
+
+        [Service]
+        Type=oneshot
+        ExecStart=/bin/sh -c "/home/core/get-release.sh | /bin/gunzip -dc | /usr/bin/docker load"
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: pinglist-api.service
+      command: start
+      content: |
+        [Unit]
+        Description=Runs the pinglist API container
+        After=get-release.service
+
+        [Service]
+        Restart=on-failure
+        RestartSec=10s
+        KillMode=none
+        EnvironmentFile=/etc/environment
+        ExecStartPre=-/usr/bin/docker stop pinglist-api
+        ExecStartPre=-/usr/bin/docker rm pinglist-api
+        ExecStart=/usr/bin/docker run --name pinglist-api -e ETCD_HOST=${etcd_host} -e ETCD_PORT=2379 -p 80:8080 --log-driver=journald pinglist-api:${release}
+
+        [Install]
+        WantedBy=multi-user.target
