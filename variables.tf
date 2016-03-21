@@ -56,7 +56,7 @@ variable "api_instance_type" {
 
 variable "region"     {
   description = "AWS region"
-  default = "ap-southeast-1"
+  default = "eu-west-2"
 }
 
 variable "ubuntu_amis" {
