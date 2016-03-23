@@ -51,7 +51,7 @@ variable "api_max_size" {
 
 variable "api_instance_type" {
   description = "EC2 instance type to use for API nodes"
-  default = "t2.small"
+  default = "t2.micro"
 }
 
 variable "region"     {
@@ -62,14 +62,30 @@ variable "region"     {
 variable "ubuntu_amis" {
   description = "Ubuntu 14.04 LTS AMIs by region"
   default = {
-    eu-west-1 = "ami-581cbe2b"
+    eu-central-1 = "ami-7e9b7c11"
+    ap-northeast-1 = "ami-01ded66f"
+    sa-east-1 = "ami-cd53dea1"
+    ap-southeast-2 = "ami-8fda11ec" # did not found this so using the one from ap-southeast-1
+    ap-southeast-1 = "ami-8fda11ec"
+    us-east-1 = "ami-df0607b5"
+    us-west-2 = "ami-12394b72" # did not found this so using the one from us-west-1
+    us-west-1 = "ami-12394b72"
+    eu-west-1 = "ami-58cc762b"
   }
 }
 
 variable "coreos_amis" {
   description = "CoreOS AMIs by region"
   default = {
-    eu-west-1 = "ami-f961d48a"
+    eu-central-1 = "ami-15190379"
+    ap-northeast-1 = "ami-02c9c86c"
+    sa-east-1 = "ami-c40784a8"
+    ap-southeast-2 = "ami-949abdf7"
+    ap-southeast-1 = "ami-00a06963"
+    us-east-1 = "ami-7f3a0b15"
+    us-west-2 = "ami-4f00e32f"
+    us-west-1 = "ami-a8aedfc8"
+    eu-west-1 = "ami-2a1fad59"
   }
 }
 
