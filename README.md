@@ -1,11 +1,13 @@
 [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair
 [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingHostedZone.html
 
-# Pinglist Terraform
+# Pinglist AWS Terraform
+
+Terraform manifests to build Pinglist AWS infrastructure.
 
 # Index
 
-* [Pinglist Terraform](#pinglist-terraform)
+* [Pinglist AWS Terraform](#pinglist-aws-terraform)
 * [Index](#index)
 * [Requirements](#requirements)
   * [Git Submodules](#git-submodules)
