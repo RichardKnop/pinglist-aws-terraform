@@ -1,3 +1,3 @@
 [submodule "ansible"]
 	path = ansible
-	url = https://github.com/RichardKnop/pinglist-ansible.git
+	url = https://github.com/RichardKnop/pinglist-aws-ansible.git
