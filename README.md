@@ -22,6 +22,8 @@ Terraform manifests to build Pinglist AWS infrastructure.
   * [Variables](#variables)
   * [Apply Execution Plan](#apply-execution-plan)
   * [Connecting To Instances](#connecting-to-instances)
+  * [Debugging](#debugging)
+  * [Recreate Database](#recreate-database)
 * [Resources](#resources)
 
 # Requirements
@@ -266,6 +268,30 @@ Now you can SSH to instances in a private subnet of the VPS via the NAT instance
 
 ```
 ssh -F ssh.config <private_ip>
+```
+
+## Debugging
+
+Once you have connected to a CoreOS node, you can use `systemctl` to check status of services:
+
+```
+systemctl pinglist-api.service
+```
+
+To view logs specific to a service running as a Docker container, use `journalctl`:
+
+```
+journalctl -u pinglist-api.service -n 100 -f
+```
+
+## Recreate Database
+
+NEVER do this against production environment.
+
+Sometimes during development it is useful or needed to destroy and recreate the database. You can use `taint` command to mark the database instance for destruction. Next time you run the `apply` command the database will be destroyed and a new once created:
+
+```
+terraform taint -module=rds -state=staging.tfstate aws_db_instance.rds
 ```
 
 # Resources
