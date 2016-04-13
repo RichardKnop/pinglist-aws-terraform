@@ -21,7 +21,7 @@ variable "etcd_size" {
 
 variable "etcd_instance_type" {
   description = "EC2 instance type to use for ETCD nodes"
-  default = "t2.micro"
+  default = "t2.nano"
 }
 
 variable "rds_instance_type" {
@@ -51,7 +51,7 @@ variable "api_max_size" {
 
 variable "api_instance_type" {
   description = "EC2 instance type to use for API nodes"
-  default = "t2.micro"
+  default = "t2.nano"
 }
 
 variable "region"     {
