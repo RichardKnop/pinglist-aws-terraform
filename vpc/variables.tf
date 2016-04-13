@@ -6,6 +6,10 @@ variable "region" {
   description = "AWS region"
 }
 
+variable "nat_instance_type" {
+  description = "EC2 instance type to use for NAT server"
+}
+
 variable "ubuntu_ami" {
   description = "Ubuntu AMI for NAT server"
 }
