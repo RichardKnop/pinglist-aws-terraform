@@ -70,7 +70,7 @@ You can get the credentials from the AWS console.
 Terraform will look for a deployment key in `~/.ssh` directory when creating a NAT instance. Add the deployment key to the ssh-agent, e.g.:
 
 ```
-ssh-add ~/.ssh/staging-pinglist-deployer
+ssh-add ~/.ssh/stage-pinglist-deployer
 ```
 
 ### SSL Certificate
@@ -180,7 +180,7 @@ You will need to export couple of needed environment variables.
 Most importantly, define an environment name, e.g.:
 
 ```
-export TF_VAR_env=staging
+export TF_VAR_env=stage
 ```
 
 Specify ETCD cluster size:
@@ -192,7 +192,7 @@ export TF_VAR_etcd_size=1
 Setup ETCD discovery URL:
 
 ```
-export TF_VAR_etcd_discovery_url=$(./get-etcd-discovery-url-from-state-file.sh staging)
+export TF_VAR_etcd_discovery_url=$(./get-etcd-discovery-url-from-state-file.sh stage)
 ```
 
 Or if you are deploying for the first time, generate a new ETCD discovery URL:
@@ -210,7 +210,7 @@ export TF_VAR_rds_skip_final_snapshot=true
 Export a DB password from the `ansible-vault`:
 
 ```
-export TF_VAR_db_password=$(cd ansible ; ./get-vault-variable.sh staging database_password)
+export TF_VAR_db_password=$(cd ansible ; ./get-vault-variable.sh stage database_password)
 ```
 
 Define which API release you want to use:
@@ -223,20 +223,20 @@ See `variables.tf` for the full list of variables you can set.
 
 ## State Files
 
-We need to support multiple environments (`staging`, `production` etc) and share state files across the team. Therefor state files include environment suffix and their encrypted versions are stored in git.
+We need to support multiple environments (`stage`, `production` etc) and share state files across the team. Therefor state files include environment suffix and their encrypted versions are stored in git.
 
 First, decrypt a state file you want to use:
 
 ```
-./decrypt-state-file.sh staging
+./decrypt-state-file.sh stage
 ```
 
-The above script would decrypt `staging.tfstate.gpg` to `staging.tfstate`.
+The above script would decrypt `stage.tfstate.gpg` to `stage.tfstate`.
 
 After running Terraform, don't forget to update the encrypted state file:
 
 ```
-./encrypt-state-file.sh staging
+./encrypt-state-file.sh stage
 ```
 
 ## Apply Execution Plan
@@ -245,13 +245,13 @@ After running Terraform, don't forget to update the encrypted state file:
 First, check the Terraform execution plan:
 
 ```
-terraform plan -state=staging.tfstate
+terraform plan -state=stage.tfstate
 ```
 
 Now you can provision the environment:
 
 ```
-terraform apply -state=staging.tfstate
+terraform apply -state=stage.tfstate
 ```
 
 **IMPORTANT**: The option `-var force_destroy=true` will mark all the resources, including S3 buckets to be deleted when destroying the environment. This is fine in test environments, but dangerous in production.
@@ -291,7 +291,7 @@ NEVER do this against production environment.
 Sometimes during development it is useful or needed to destroy and recreate the database. You can use `taint` command to mark the database instance for destruction. Next time you run the `apply` command the database will be destroyed and a new once created:
 
 ```
-terraform taint -module=rds -state=staging.tfstate aws_db_instance.rds
+terraform taint -module=rds -state=stage.tfstate aws_db_instance.rds
 ```
 
 # Resources
