@@ -44,6 +44,7 @@ module "api" {
   env = "${var.env}"
   region = "${var.region}"
   vpc_id = "${module.vpc.vpc_id}"
+  api_prefix = "${lookup(var.api_prefix, var.env)}"
   api_min_size = "${var.api_min_size}"
   api_max_size = "${var.api_max_size}"
   api_instance_type = "${var.api_instance_type}"
