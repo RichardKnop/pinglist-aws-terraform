@@ -183,12 +183,6 @@ Most importantly, define an environment name, e.g.:
 export TF_VAR_env=stage
 ```
 
-Specify ETCD cluster size:
-
-```
-export TF_VAR_etcd_size=1
-```
-
 Setup ETCD discovery URL:
 
 ```
