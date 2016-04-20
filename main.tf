@@ -6,7 +6,7 @@ module "vpc" {
   ubuntu_ami = "${lookup(var.ubuntu_amis, var.region)}"
   dns_zone_id = "${var.dns_zone_id}"
   dns_zone_name = "${var.dns_zone_name}"
-  nat_instance_type = "${var.nat_instance_type}"
+  nat_instance_type = "${lookup(var.nat_instance_type, var.env)}"
 }
 
 module "rds" {
@@ -14,8 +14,8 @@ module "rds" {
 
   env = "${var.env}"
   vpc_id = "${module.vpc.vpc_id}"
-  rds_instance_type = "${var.rds_instance_type}"
-  rds_allocated_storage = "${var.rds_allocated_storage}"
+  rds_instance_type = "${lookup(var.rds_instance_type, var.env)}"
+  rds_allocated_storage = "${lookup(var.rds_allocated_storage, var.env)}"
   rds_skip_final_snapshot = "${var.rds_skip_final_snapshot}"
   private_subnets = "${split(",", module.vpc.private_subnets)}"
   dns_zone_id = "${var.dns_zone_id}"
@@ -28,8 +28,8 @@ module "etcd" {
 
   env = "${var.env}"
   vpc_id = "${module.vpc.vpc_id}"
-  etcd_size = "${var.etcd_size}"
-  etcd_instance_type = "${var.etcd_instance_type}"
+  etcd_size = "${lookup(var.etcd_size, var.env)}"
+  etcd_instance_type = "${lookup(var.etcd_instance_type, var.env)}"
   private_subnets = "${split(",", module.vpc.private_subnets)}"
   coreos_ami = "${lookup(var.coreos_amis, var.region)}"
   default_security_group = "${module.vpc.default_security_group}"
@@ -45,9 +45,9 @@ module "api" {
   region = "${var.region}"
   vpc_id = "${module.vpc.vpc_id}"
   api_prefix = "${lookup(var.api_prefix, var.env)}"
-  api_min_size = "${var.api_min_size}"
-  api_max_size = "${var.api_max_size}"
-  api_instance_type = "${var.api_instance_type}"
+  api_min_size = "${lookup(var.api_min_size, var.env)}"
+  api_max_size = "${lookup(var.api_max_size, var.env)}"
+  api_instance_type = "${lookup(var.api_instance_type, var.env)}"
   private_subnets = "${split(",", module.vpc.private_subnets)}"
   public_subnets = "${split(",", module.vpc.public_subnets)}"
   coreos_ami = "${lookup(var.coreos_amis, var.region)}"

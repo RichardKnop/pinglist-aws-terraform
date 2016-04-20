@@ -4,9 +4,13 @@ variable "env" {
 }
 
 variable "nat_instance_type" {
-  type        = "string"
+  type        = "map"
   description = "EC2 instance type to use for NAT server"
-  default     = "t2.nano"
+
+  default     = {
+    stage = "t2.nano"
+    prod  = "t2.nano"
+  }
 }
 
 variable "etcd_discovery_url" {
@@ -25,27 +29,43 @@ variable "db_password" {
 }
 
 variable "etcd_size" {
-  type        = "string"
+  type        = "map"
   description = "ETCD cluster size"
-  default     = 1
+
+  default     = {
+    stage = 1
+    prod  = 1
+  }
 }
 
 variable "etcd_instance_type" {
-  type        = "string"
+  type        = "map"
   description = "EC2 instance type to use for ETCD nodes"
-  default     = "t2.nano"
+
+  default     = {
+    stage = "t2.nano"
+    prod  = "t2.nano"
+  }
 }
 
 variable "rds_instance_type" {
-  type        = "string"
+  type        = "map"
   description = "RDS instance type"
-  default     = "db.t1.micro"
+
+  default     = {
+    stage = "db.t2.micro"
+    prod  = "db.t2.small"
+  }
 }
 
 variable "rds_allocated_storage" {
-  type        = "string"
+  type        = "map"
   description = "RDS allocated storage"
-  default     = 30
+
+  default     = {
+    stage = 10
+    prod  = 30
+  }
 }
 
 variable "rds_skip_final_snapshot" {
@@ -55,21 +75,33 @@ variable "rds_skip_final_snapshot" {
 }
 
 variable "api_min_size" {
-  type        = "string"
+  type        = "map"
   description = "API autoscaling group min size"
-  default     = 1
+
+  default     = {
+    stage = 1
+    prod  = 1
+  }
 }
 
 variable "api_max_size" {
-  type        = "string"
+  type        = "map"
   description = "API autoscaling group max size"
-  default     = 4
+
+  default     = {
+    stage = 4
+    prod  = 4
+  }
 }
 
 variable "api_instance_type" {
-  type        = "string"
+  type        = "map"
   description = "EC2 instance type to use for API nodes"
-  default     = "t2.nano"
+
+  default     = {
+    stage = "t2.micro"
+    prod  = "t2.micro"
+  }
 }
 
 variable "region" {
