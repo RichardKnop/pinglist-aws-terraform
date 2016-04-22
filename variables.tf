@@ -172,7 +172,7 @@ variable "ssl_certificate_id" {
 variable "dns_zone_id" {
   type        = "string"
   description = "Amazon Route53 DNS zone identifier"
-  default     = "TODO"
+  default     = "Z3MMAQ2RD2LDLA"
 }
 
 variable "dns_zone_name" {
