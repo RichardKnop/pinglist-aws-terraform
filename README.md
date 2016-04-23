@@ -117,7 +117,7 @@ Result:
     "ServerCertificateName": "pinglist-certificate",
     "Expiration": "2017-04-23T23:59:59Z",
     "Path": "/",
-    "Arn": "arn:aws:iam::800222191807:server-certificate/pinglist-certificate", 
+    "Arn": "arn:aws:iam::800222191807:server-certificate/pinglist-certificate",
     "UploadDate": "2016-04-23T17:58:23.272Z"
   }
 }
@@ -171,7 +171,7 @@ git submodule update --remote
 Render an SSH configuration file, i.e.:
 
 ```
-./render-ssh-config <env-name-prefix>
+./render-ssh-config.sh <env-name-prefix>
 ```
 
 Create virtual Python environment for `pinglist-ansible` submodule:
