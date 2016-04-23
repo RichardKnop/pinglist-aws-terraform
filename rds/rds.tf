@@ -9,6 +9,8 @@ resource "aws_db_instance" "rds" {
   instance_class = "${var.rds_instance_type}"
   username = "${var.db_username}"
   password = "${var.db_password}"
+  auto_minor_version_upgrade = true
+  allow_major_version_upgrade = true
   vpc_security_group_ids = [
     "${aws_security_group.rds.id}",
   ]
