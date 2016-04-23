@@ -39,9 +39,9 @@ variable "availability_zones" {
   description = "AWS availability zones"
 
   default     = {
-    zone0 = "eu-west-1a"
-    zone1 = "eu-west-1b"
-    zone2 = "eu-west-1c"
+    zone0 = "us-west-2a"
+    zone1 = "us-west-2b"
+    zone2 = "us-west-2c"
   }
 }
 
@@ -59,7 +59,7 @@ variable "public_cidrs" {
 variable "private_cidrs" {
   type        = "map"
   description = "CIDR for private subnet indexed by AZ"
-  
+
   default     = {
     zone0 = "10.0.1.0/24"
     zone1 = "10.0.11.0/24"
