@@ -110,8 +110,17 @@ aws iam upload-server-certificate --server-certificate-name pinglist-certificate
 
 Result:
 
-```
-TODO
+```json
+{
+  "ServerCertificateMetadata": {
+    "ServerCertificateId": "ASCAIRNGM2AA5Z4HA5TUQ",
+    "ServerCertificateName": "pinglist-certificate",
+    "Expiration": "2017-04-23T23:59:59Z",
+    "Path": "/",
+    "Arn": "arn:aws:iam::800222191807:server-certificate/pinglist-certificate", 
+    "UploadDate": "2016-04-23T17:58:23.272Z"
+  }
+}
 ```
 
 `Arn` attribute is used as `ssl_certificate_id` for HTTPS listener in the ELB.

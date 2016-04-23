@@ -166,7 +166,7 @@ variable "coreos_amis" {
 variable "ssl_certificate_id" {
   type        = "string"
   description = "The id of an SSL certificate uploaded to AWS IAM"
-  default     = "TODO"
+  default     = "arn:aws:iam::800222191807:server-certificate/pinglist-certificate"
 }
 
 variable "dns_zone_id" {
