@@ -10,7 +10,7 @@ resource "aws_security_group" "rds_user" {
 
 resource "aws_security_group" "rds" {
   name = "${var.env}-pinglist-rds-sg"
-  description = "Security group for RDS instances that allows traffic from API servers"
+  description = "Security group for RDS that allows connections from other instances with rds_user security group"
   vpc_id = "${var.vpc_id}"
 
   ingress {
