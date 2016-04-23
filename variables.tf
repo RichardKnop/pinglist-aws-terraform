@@ -25,7 +25,12 @@ variable "api_release" {
 
 variable "db_password" {
   type        = "string"
-  description = "Database password, provide through your ENV variables"
+  description = "Main database password"
+}
+
+variable "app_db_password" {
+  type        = "string"
+  description = "Web app's database password"
 }
 
 variable "etcd_size" {

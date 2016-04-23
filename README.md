@@ -210,10 +210,16 @@ For test environments, it's useful to disable final DB snapshot:
 export TF_VAR_rds_skip_final_snapshot=true
 ```
 
-Export a DB password from the `ansible-vault`:
+Export the main DB password from the `ansible-vault`:
 
 ```
 export TF_VAR_db_password=$(cd ansible ; ./get-vault-variable.sh stage database_password)
+```
+
+Export the web app's DB password from the `ansible-vault`:
+
+```
+export TF_VAR_app_db_password=$(cd ansible ; ./get-vault-variable.sh stage app_database_password)
 ```
 
 Define which API release you want to use:

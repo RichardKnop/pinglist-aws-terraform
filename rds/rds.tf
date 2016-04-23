@@ -24,3 +24,24 @@ resource "aws_db_subnet_group" "default" {
   description = "Our main group of subnets"
   subnet_ids = ["${var.private_subnets}"]
 }
+
+provider "postgresql" {
+  alias = "pg1"
+  host = "${aws_db_instance.rds.address}"
+  username = "${var.db_username}"
+  password = "${var.db_password}"
+}
+
+resource "postgresql_role" "app_db_role" {
+  provider = "postgresql.pg1"
+  name = "${var.app_db_username}"
+  login = true
+  password = "${var.app_db_password}"
+  encrypted = true
+}
+
+resource "postgresql_database" "app_database" {
+  provider = "postgresql.pg1"
+  name = "${var.app_db_name}"
+  owner = "${var.app_db_username}"
+}

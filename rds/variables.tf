@@ -41,22 +41,39 @@ variable "dns_zone_name" {
 variable "postgres_engine_version" {
   type        = "string"
   description = "Version of Postgres we want to provision"
-  default     = "9.4.5"
-}
-
-variable "db_password" {
-  type        = "string"
-  description = "Database password"
-}
-
-variable "db_name" {
-  type        = "string"
-  description = "Database name"
-  default     = "pinglist"
+  default     = "9.5.2"
 }
 
 variable "db_username" {
   type        = "string"
-  description = "Database username"
+  description = "Main database username"
   default     = "pinglist"
+}
+
+variable "db_password" {
+  type        = "string"
+  description = "Main database password"
+}
+
+variable "db_name" {
+  type        = "string"
+  description = "Main database name"
+  default     = "pinglist"
+}
+
+variable "app_db_username" {
+  type        = "string"
+  description = "Web app's database username"
+  default     = "pinglist_app"
+}
+
+variable "app_db_password" {
+  type        = "string"
+  description = "Web app's database password"
+}
+
+variable "app_db_name" {
+  type        = "string"
+  description = "Web app's database name"
+  default     = "pinglist_app"
 }
