@@ -129,7 +129,7 @@ variable "coreos_amis" {
   description = "CoreOS AMIs by region"
 
   default     = {
-    us-west-2 = "ami-4f7f8a2f"
+    us-west-2 = "ami-141df674"
   }
 }
 
