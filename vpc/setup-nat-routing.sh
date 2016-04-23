@@ -23,4 +23,4 @@ while pgrep cloud-init > /dev/null; do echo "Waiting for cloudinit to finish..."
 echo "Save iptables state"
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y iptables-persistent
-sudo service iptables-persistent save
+sudo service netfilter-persistent save
