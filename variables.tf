@@ -107,7 +107,7 @@ variable "api_instance_type" {
 variable "region" {
   type        = "string"
   description = "AWS region"
-  default     = "eu-west-2"
+  default     = "us-west-2"
 }
 
 variable "ubuntu_amis" {
@@ -115,24 +115,13 @@ variable "ubuntu_amis" {
   description = "Ubuntu 14.04 LTS AMIs by region"
 
   default     = {
-    # Europe
     eu-west-1       = "ami-58cc762b"
     eu-central-1    = "ami-7e9b7c11"
-
-    # Asia Pacific
     ap-northeast-1  = "ami-01ded66f"
     ap-southeast-1  = "ami-8fda11ec"
-
-    # did not found this so using the one from ap-southeast-1
     ap-southeast-2  = "ami-8fda11ec"
-
-    # South East Asia
     sa-east-1       = "ami-cd53dea1"
-
-    # US
     us-east-1       = "ami-df0607b5"
-
-    # did not found this so using the one from us-west-1
     us-west-2       = "ami-12394b72"
     us-west-1       = "ami-12394b72"
 
@@ -144,22 +133,15 @@ variable "coreos_amis" {
   description = "CoreOS AMIs by region"
 
   default     = {
-    # Europe
-    eu-central-1 = "ami-15190379"
-    eu-west-1 = "ami-2a1fad59"
-
-    # Asia Pacific
-    ap-northeast-1 = "ami-02c9c86c"
-    ap-southeast-2 = "ami-949abdf7"
-    ap-southeast-1 = "ami-00a06963"
-
-    # South East Asia
-    sa-east-1 = "ami-c40784a8"
-
-    # US
-    us-east-1 = "ami-7f3a0b15"
-    us-west-2 = "ami-4f00e32f"
-    us-west-1 = "ami-a8aedfc8"
+    eu-central-1    = "ami-15190379"
+    eu-west-1       = "ami-2a1fad59"
+    ap-northeast-1  = "ami-02c9c86c"
+    ap-southeast-2  = "ami-949abdf7"
+    ap-southeast-1  = "ami-00a06963"
+    sa-east-1       = "ami-c40784a8"
+    us-east-1       = "ami-7f3a0b15"
+    us-west-2       = "ami-4f00e32f"
+    us-west-1       = "ami-a8aedfc8"
   }
 }
 
