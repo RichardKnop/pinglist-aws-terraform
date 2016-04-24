@@ -48,8 +48,8 @@ variable "etcd_instance_type" {
   description = "EC2 instance type to use for ETCD nodes"
 
   default     = {
-    stage = "t2.nano"
-    prod  = "t2.nano"
+    stage = "t2.micro"
+    prod  = "t2.micro"
   }
 }
 
