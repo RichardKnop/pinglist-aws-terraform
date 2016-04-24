@@ -3,7 +3,7 @@ module "vpc" {
 
   env = "${var.env}"
   region = "${var.region}"
-  ubuntu_ami = "${lookup(var.ubuntu_amis, var.region)}"
+  nat_ami = "${lookup(var.nat_amis, var.region)}"
   dns_zone_id = "${var.dns_zone_id}"
   dns_zone_name = "${var.dns_zone_name}"
   nat_instance_type = "${lookup(var.nat_instance_type, var.env)}"

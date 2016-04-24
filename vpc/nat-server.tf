@@ -1,5 +1,5 @@
 resource "aws_instance" "nat" {
-  ami = "${var.ubuntu_ami}"
+  ami = "${var.nat_ami}"
   instance_type = "${var.nat_instance_type}"
   subnet_id = "${aws_subnet.public.0.id}"
   source_dest_check = false
@@ -16,16 +16,12 @@ resource "aws_instance" "nat" {
 
   key_name = "${var.env}-pinglist-deployer"
   connection {
-    user = "ubuntu"
+    user = "ec2-user"
     key_file = "~/.ssh/${var.env}-pinglist-deployer"
   }
 
-  provisioner "remote-exec" {
-    script = "${path.module}/setup-nat-routing.sh"
-  }
-
   tags = {
-    OS = "${var.env}-pinglist-ubuntu"
+    OS = "${var.env}-pinglist-amazon-linux"
     Name = "${var.env}-pinglist-nat"
   }
 }

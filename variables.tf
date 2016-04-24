@@ -115,12 +115,12 @@ variable "region" {
   default     = "us-west-2"
 }
 
-variable "ubuntu_amis" {
+variable "nat_amis" {
   type        = "map"
-  description = "Ubuntu 14.04 LTS AMIs by region"
+  description = "AMIs for NAT server by region"
 
   default     = {
-    us-west-2 = "ami-eb49bc8b"
+    us-west-2 = "ami-69ae8259"
   }
 }
 

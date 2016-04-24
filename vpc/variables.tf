@@ -13,9 +13,9 @@ variable "nat_instance_type" {
   description = "EC2 instance type to use for NAT server"
 }
 
-variable "ubuntu_ami" {
+variable "nat_ami" {
   type        = "string"
-  description = "Ubuntu AMI for NAT server"
+  description = "AMI for NAT server"
 }
 
 variable "dns_zone_id" {
