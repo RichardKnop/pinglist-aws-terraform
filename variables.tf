@@ -48,8 +48,8 @@ variable "etcd_instance_type" {
   description = "EC2 instance type to use for ETCD nodes"
 
   default     = {
-    stage = "t2.nano"
-    prod  = "t2.nano"
+    stage = "t2.micro"
+    prod  = "t2.micro"
   }
 }
 
@@ -85,7 +85,7 @@ variable "api_min_size" {
 
   default     = {
     stage = 1
-    prod  = 1
+    prod  = 2
   }
 }
 
@@ -94,7 +94,7 @@ variable "api_max_size" {
   description = "API autoscaling group max size"
 
   default     = {
-    stage = 4
+    stage = 2
     prod  = 4
   }
 }
