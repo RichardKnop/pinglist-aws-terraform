@@ -29,7 +29,7 @@ resource "aws_db_subnet_group" "default" {
 
 provider "postgresql" {
   alias = "pg1"
-  host = "${aws_db_instance.rds.endpoint}"
+  host = "${aws_route53_record.rds.fqdn}"
   username = "${var.db_username}"
   password = "${var.db_password}"
 }
