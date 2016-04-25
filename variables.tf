@@ -28,11 +28,6 @@ variable "db_password" {
   description = "Main database password"
 }
 
-variable "app_db_password" {
-  type        = "string"
-  description = "Web app's database password"
-}
-
 variable "etcd_size" {
   type        = "map"
   description = "ETCD cluster size"
