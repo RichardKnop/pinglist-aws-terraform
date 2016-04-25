@@ -28,24 +28,20 @@ resource "aws_db_subnet_group" "default" {
 }
 
 provider "postgresql" {
-  alias = "pg1"
-  host = "${aws_route53_record.rds.address}"
+  host = "${aws_db_instance.rds.address}"
   username = "${var.db_username}"
   password = "${var.db_password}"
 }
 
-resource "postgresql_role" "app_db_role" {
-  provider = "postgresql.pg1"
+resource "postgresql_role" "app" {
   name = "${var.app_db_username}"
   login = true
   password = "${var.app_db_password}"
-  encrypted = true
   depends_on = ["aws_db_instance.rds"]
 }
 
-resource "postgresql_database" "app_database" {
-  provider = "postgresql.pg1"
+resource "postgresql_database" "app" {
   name = "${var.app_db_name}"
-  owner = "${var.app_db_username}"
+  owner = "${postgresql_role.app.name}"
   depends_on = ["aws_db_instance.rds"]
 }
