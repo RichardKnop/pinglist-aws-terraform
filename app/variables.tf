@@ -63,6 +63,11 @@ variable "etcd_user_security_group" {
   description = "ETCD user security group"
 }
 
+variable "rds_user_security_group" {
+  type        = "string"
+  description = "RDS user security group"
+}
+
 variable "ssl_certificate_id" {
   type        = "string"
   description = "The id of an SSL certificate uploaded to AWS IAM"

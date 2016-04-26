@@ -24,6 +24,7 @@ resource "aws_launch_configuration" "app" {
     "${var.default_security_group}",
     "${aws_security_group.app.id}",
     "${var.etcd_user_security_group}",
+    "${var.rds_user_security_group}",
   ]
 
   key_name = "${var.env}-pinglist-deployer"

@@ -88,6 +88,7 @@ module "app" {
   default_security_group = "${module.vpc.default_security_group}"
   web_security_group = "${module.vpc.web_security_group}"
   etcd_user_security_group = "${module.etcd.user_security_group}"
+  rds_user_security_group = "${module.rds.user_security_group}"
   ssl_certificate_id = "${var.ssl_certificate_id}"
   app_release = "${var.app_release}"
   etcd_host = "${module.etcd.dns_name}"
