@@ -19,6 +19,10 @@ resource "aws_db_instance" "rds" {
   publicly_accessible = false
   backup_retention_period = 7
   depends_on = ["aws_db_subnet_group.default"]
+
+  tags = {
+    Name = "${var.env}-pinglist-rds"
+  }
 }
 
 resource "aws_db_subnet_group" "default" {
