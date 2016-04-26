@@ -222,6 +222,12 @@ Define which API release you want to use:
 export TF_VAR_api_release=v0.0.0
 ```
 
+Define which web app release you want to use:
+
+```
+export TF_VAR_app_release=v0.0.0
+```
+
 See `variables.tf` for the full list of variables you can set.
 
 ## State Files

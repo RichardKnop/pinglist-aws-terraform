@@ -71,3 +71,26 @@ module "s3" {
   private_route_table = "${module.vpc.private_route_table}"
   force_destroy = "${var.force_destroy}"
 }
+
+module "app" {
+  source = "./app"
+
+  env = "${var.env}"
+  region = "${var.region}"
+  vpc_id = "${module.vpc.vpc_id}"
+  app_prefix = "${lookup(var.app_prefix, var.env)}"
+  app_min_size = "${lookup(var.app_min_size, var.env)}"
+  app_max_size = "${lookup(var.app_max_size, var.env)}"
+  app_instance_type = "${lookup(var.app_instance_type, var.env)}"
+  private_subnets = "${split(",", module.vpc.private_subnets)}"
+  public_subnets = "${split(",", module.vpc.public_subnets)}"
+  coreos_ami = "${lookup(var.coreos_amis, var.region)}"
+  default_security_group = "${module.vpc.default_security_group}"
+  web_security_group = "${module.vpc.web_security_group}"
+  etcd_user_security_group = "${module.etcd.user_security_group}"
+  ssl_certificate_id = "${var.ssl_certificate_id}"
+  app_release = "${var.app_release}"
+  etcd_host = "${module.etcd.dns_name}"
+  dns_zone_id = "${var.dns_zone_id}"
+  dns_zone_name = "${var.dns_zone_name}"
+}

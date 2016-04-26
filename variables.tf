@@ -23,6 +23,11 @@ variable "api_release" {
   description = "Release version of API service"
 }
 
+variable "app_release" {
+  type        = "string"
+  description = "Release version of web app service"
+}
+
 variable "db_password" {
   type        = "string"
   description = "Main database password"
@@ -104,6 +109,36 @@ variable "api_instance_type" {
   }
 }
 
+variable "app_min_size" {
+  type        = "map"
+  description = "Web app autoscaling group min size"
+
+  default     = {
+    stage = 1
+    prod  = 2
+  }
+}
+
+variable "app_max_size" {
+  type        = "map"
+  description = "Web app autoscaling group max size"
+
+  default     = {
+    stage = 2
+    prod  = 4
+  }
+}
+
+variable "app_instance_type" {
+  type        = "map"
+  description = "EC2 instance type to use for web app nodes"
+
+  default     = {
+    stage = "t2.micro"
+    prod  = "t2.micro"
+  }
+}
+
 variable "region" {
   type        = "string"
   description = "AWS region"
@@ -153,6 +188,16 @@ variable "api_prefix" {
   default     = {
     stage = "stage-api"
     prod  = "api"
+  }
+}
+
+variable "app_prefix" {
+  type        = "map"
+  description = "Prefix for web app based on environment"
+
+  default     = {
+    stage = "stage-app"
+    prod  = "app"
   }
 }
 
