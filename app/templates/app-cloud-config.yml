@@ -48,7 +48,7 @@ coreos:
         EnvironmentFile=/etc/environment
         ExecStartPre=-/usr/bin/docker stop pinglist-app
         ExecStartPre=-/usr/bin/docker rm pinglist-app
-        ExecStart=/usr/bin/docker run --name pinglist-app -e ETCD_HOST=${etcd_host} -e ETCD_PORT=2379 -p 80:8080 --log-driver=journald pinglist-app:${release}
+        ExecStart=/usr/bin/docker run --name pinglist-app -e ETCD_HOST=${etcd_host} -e ETCD_PORT=2379 -p 80:80 --log-driver=journald pinglist-app:${release}
 
         [Install]
         WantedBy=multi-user.target
