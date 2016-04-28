@@ -213,7 +213,7 @@ export TF_VAR_rds_skip_final_snapshot=true
 Export the main DB password from the `ansible-vault`:
 
 ```
-export TF_VAR_db_password=$(cd ansible ; ./get-vault-variable.sh stage database_password)
+export TF_VAR_db_password=$(cd ansible ; ./get-vault-variable.sh stage api_database_password)
 ```
 
 Define which API release you want to use:
