@@ -186,8 +186,8 @@ variable "api_prefix" {
   description = "Prefix for API based on environment"
 
   default     = {
-    stage = "stage-api"
-    prod  = "api"
+    stage = "stage-api."
+    prod  = "api."
   }
 }
 
@@ -196,8 +196,8 @@ variable "app_prefix" {
   description = "Prefix for web app based on environment"
 
   default     = {
-    stage = "stage-app"
-    prod  = "app"
+    stage = "stage-app."
+    prod  = ""
   }
 }
 
