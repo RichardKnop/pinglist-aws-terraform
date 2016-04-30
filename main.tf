@@ -21,6 +21,7 @@ module "rds" {
   dns_zone_id = "${var.dns_zone_id}"
   dns_zone_name = "${var.dns_zone_name}"
   db_password = "${var.db_password}"
+  app_db_password = "${var.app_db_password}"
 }
 
 module "etcd" {

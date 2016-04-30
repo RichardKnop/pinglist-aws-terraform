@@ -60,3 +60,20 @@ variable "db_name" {
   description = "Main database name"
   default     = "pinglist"
 }
+
+variable "app_db_username" {
+  type        = "string"
+  description = "Web app's database username"
+  default     = "pinglist_app"
+}
+
+variable "app_db_password" {
+  type        = "string"
+  description = "Web app's database password"
+}
+
+variable "app_db_name" {
+  type        = "string"
+  description = "Web app's database name"
+  default     = "pinglist_app"
+}
