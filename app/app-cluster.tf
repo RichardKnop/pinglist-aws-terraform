@@ -30,6 +30,10 @@ resource "aws_launch_configuration" "app" {
   key_name = "${var.env}-pinglist-deployer"
 
   user_data = "${template_file.app_cloud_config.rendered}"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_autoscaling_group" "app" {
@@ -41,6 +45,10 @@ resource "aws_autoscaling_group" "app" {
   min_size = "${var.app_min_size}"
   max_size = "${var.app_max_size}"
   desired_capacity = "${var.app_min_size}"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 
   tag {
     key = "OS"
