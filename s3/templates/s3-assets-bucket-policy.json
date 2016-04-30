@@ -1,0 +1,40 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Sid": "Allow access from our domains",
+    "Effect": "Allow",
+    "Principal": {
+      "AWS": "*"
+    },
+    "Action": "s3:GetObject",
+    "Resource": "arn:aws:s3:::${env}.pinglist.assets/*",
+    "Condition": {
+      "StringLike": {
+        "aws:Referer": [
+          "https://pingli.st/*",
+          "https://www.pingli.st/*",
+          "https://*.pingli.st/*",
+          "https://www.*.pingli.st/*"
+        ]
+      }
+    }
+  }, {
+    "Sid": "Deny access from other domains",
+    "Effect": "Deny",
+    "Principal": {
+      "AWS": "*"
+    },
+    "Action": "s3:GetObject",
+    "Resource": "arn:aws:s3:::${env}.pinglist.assets/*",
+    "Condition": {
+      "StringNotLike": {
+        "aws:Referer": [
+          "https://pingli.st/*",
+          "https://www.pingli.st/*",
+          "https://*.pingli.st/*",
+          "https://www.*.pingli.st/*"
+        ]
+      }
+    }
+  }]
+}
