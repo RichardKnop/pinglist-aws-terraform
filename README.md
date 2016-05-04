@@ -155,7 +155,13 @@ Then, you can go to AWS console, navigate to SNS home and create a new platform 
 Save the application ARN, for example:
 
 ```
-TODO
+arn:aws:sns:us-west-2:800222191807:app/APNS_SANDBOX/pinglist-ios-stage
+```
+
+Or:
+
+```
+arn:aws:sns:us-west-2:800222191807:app/APNS/pinglist-ios-prod
 ```
 
 The ARN is needed to create endpoints.
