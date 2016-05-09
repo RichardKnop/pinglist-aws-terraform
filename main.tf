@@ -45,6 +45,7 @@ module "api" {
   region = "${var.region}"
   vpc_id = "${module.vpc.vpc_id}"
   api_prefix = "${lookup(var.api_prefix, var.env)}"
+  apns_platform_application_arn = "${var.apns_platform_application_arn}"
   api_min_size = "${lookup(var.api_min_size, var.env)}"
   api_max_size = "${lookup(var.api_max_size, var.env)}"
   api_instance_type = "${lookup(var.api_instance_type, var.env)}"

@@ -18,6 +18,11 @@ variable "api_prefix" {
   description = "DNS prefix"
 }
 
+variable "apns_platform_application_arn" {
+  type        = "string"
+  description = "The id of a APNS platform application ARN"
+}
+
 variable "api_min_size" {
   type        = "string"
   description = "API autoscaling group min size"

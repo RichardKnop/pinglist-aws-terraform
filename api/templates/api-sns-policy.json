@@ -1,0 +1,18 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1460731049000",
+      "Effect": "Allow",
+      "Action": [
+        "sns:CreatePlatformEndpoint",
+        "sns:GetEndpointAttributes",
+        "sns:Publish",
+        "sns:SetEndpointAttributes"
+      ],
+      "Resource": [
+        "${apns_platform_application_arn}"
+      ]
+    }
+  ]
+}

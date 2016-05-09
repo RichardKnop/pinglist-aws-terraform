@@ -33,6 +33,11 @@ variable "db_password" {
   description = "Main database password"
 }
 
+variable "apns_platform_application_arn" {
+  type        = "string"
+  description = "The id of a APNS platform application ARN"
+}
+
 variable "etcd_size" {
   type        = "map"
   description = "ETCD cluster size"

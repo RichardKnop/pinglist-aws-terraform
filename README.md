@@ -210,6 +210,12 @@ Or if you are deploying for the first time, generate a new ETCD discovery URL:
 export TF_VAR_etcd_discovery_url=`curl https://discovery.etcd.io/new?size=1`
 ```
 
+Setup APNS platform application ARN:
+
+```
+export TF_VAR_apns_platform_application_arn=$(cd ansible ; ./get-vault-variable.sh stage apns_platform_application_arn)
+```
+
 For test environments, it's useful to disable final DB snapshot:
 
 ```
