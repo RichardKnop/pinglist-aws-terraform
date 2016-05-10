@@ -198,10 +198,16 @@ Most importantly, define an environment name, e.g.:
 export TF_VAR_env=stage
 ```
 
+Or:
+
+```
+export TF_VAR_env=prod
+```
+
 Setup ETCD discovery URL:
 
 ```
-export TF_VAR_etcd_discovery_url=$(./get-etcd-discovery-url-from-state-file.sh stage)
+export TF_VAR_etcd_discovery_url=$(./get-etcd-discovery-url-from-state-file.sh $TF_VAR_env)
 ```
 
 Or if you are deploying for the first time, generate a new ETCD discovery URL:
@@ -213,7 +219,7 @@ export TF_VAR_etcd_discovery_url=`curl https://discovery.etcd.io/new?size=1`
 Setup APNS platform application ARN:
 
 ```
-export TF_VAR_apns_platform_application_arn=$(cd ansible ; ./get-vault-variable.sh stage apns_platform_application_arn)
+export TF_VAR_apns_platform_application_arn=$(cd ansible ; ./get-vault-variable.sh $TF_VAR_env apns_platform_application_arn)
 ```
 
 For test environments, it's useful to disable final DB snapshot:
@@ -225,7 +231,7 @@ export TF_VAR_rds_skip_final_snapshot=true
 Export the main DB password from the `ansible-vault`:
 
 ```
-export TF_VAR_db_password=$(cd ansible ; ./get-vault-variable.sh stage api_database_password)
+export TF_VAR_db_password=$(cd ansible ; ./get-vault-variable.sh $TF_VAR_env api_database_password)
 ```
 
 Define which API release you want to use:
@@ -244,20 +250,20 @@ See `variables.tf` for the full list of variables you can set.
 
 ## State Files
 
-We need to support multiple environments (`stage`, `production` etc) and share state files across the team. Therefor state files include environment suffix and their encrypted versions are stored in git.
+We need to support multiple environments (`stage`, `prod` etc) and share state files across the team. Therefor state files include environment suffix and their encrypted versions are stored in git.
 
 First, decrypt a state file you want to use:
 
 ```
-./decrypt-state-file.sh stage
+./decrypt-state-file.sh $TF_VAR_env
 ```
 
-The above script would decrypt `stage.tfstate.gpg` to `stage.tfstate`.
+The above script would decrypt `$TF_VAR_env.tfstate.gpg` to `$TF_VAR_env.tfstate`.
 
 After running Terraform, don't forget to update the encrypted state file:
 
 ```
-./encrypt-state-file.sh stage
+./encrypt-state-file.sh $TF_VAR_env
 ```
 
 ## Apply Execution Plan
@@ -266,13 +272,13 @@ After running Terraform, don't forget to update the encrypted state file:
 First, check the Terraform execution plan:
 
 ```
-terraform plan -state=stage.tfstate
+terraform plan -state=$TF_VAR_env.tfstate
 ```
 
 Now you can provision the environment:
 
 ```
-terraform apply -state=stage.tfstate
+terraform apply -state=$TF_VAR_env.tfstate
 ```
 
 **IMPORTANT**: The option `-var force_destroy=true` will mark all the resources, including S3 buckets to be deleted when destroying the environment. This is fine in test environments, but dangerous in production.
@@ -280,7 +286,7 @@ terraform apply -state=stage.tfstate
 So, you could provision a test environment like this:
 
 ```
-terraform apply -var force_destroy=true
+terraform apply -state=$TF_VAR_env.tfstate -var force_destroy=true
 ```
 
 ## Connecting To Instances
@@ -312,7 +318,7 @@ NEVER do this against production environment.
 Sometimes during development it is useful or needed to destroy and recreate the database. You can use `taint` command to mark the database instance for destruction. Next time you run the `apply` command the database will be destroyed and a new once created:
 
 ```
-terraform taint -module=rds -state=stage.tfstate aws_db_instance.rds
+terraform taint -module=rds -state=$TF_VAR_env.tfstate aws_db_instance.rds
 ```
 
 # Resources
