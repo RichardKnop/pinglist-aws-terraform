@@ -202,7 +202,7 @@ variable "app_prefix" {
 
   default     = {
     stage = "stage-app."
-    prod  = ""
+    prod  = "app."
   }
 }
 
