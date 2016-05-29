@@ -8,6 +8,10 @@ resource "template_file" "api_cloud_config" {
     region = "${var.region}"
     etcd_host = "${var.etcd_host}"
   }
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_launch_configuration" "api" {
