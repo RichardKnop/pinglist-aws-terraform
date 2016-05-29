@@ -302,7 +302,7 @@ ssh -F ssh.config <private_ip>
 Once you have connected to a CoreOS node, you can use `systemctl` to check status of services:
 
 ```
-systemctl pinglist-api.service
+systemctl status pinglist-api.service
 ```
 
 To view logs specific to a service running as a Docker container, use `journalctl`:
