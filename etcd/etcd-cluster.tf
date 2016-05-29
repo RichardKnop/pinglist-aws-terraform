@@ -17,7 +17,7 @@ resource "aws_instance" "etcd" {
     volume_size = 10
   }
 
-  security_groups = [
+  vpc_security_group_ids = [
     "${var.default_security_group}",
     "${aws_security_group.etcd_cluster.id}",
     "${aws_security_group.etcd.id}"

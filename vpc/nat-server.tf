@@ -9,7 +9,7 @@ resource "aws_instance" "nat" {
     volume_size = 10
   }
 
-  security_groups = [
+  vpc_security_group_ids = [
     "${aws_security_group.nat.id}",
     "${aws_security_group.nat_route.id}"
   ]
