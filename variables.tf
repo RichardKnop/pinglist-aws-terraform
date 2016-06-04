@@ -64,7 +64,7 @@ variable "rds_instance_type" {
 
   default     = {
     stage = "db.t2.micro"
-    prod  = "db.t2.small"
+    prod  = "db.t2.micro"
   }
 }
 
