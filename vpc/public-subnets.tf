@@ -3,7 +3,7 @@ resource "aws_internet_gateway" "default" {
 }
 
 resource "aws_subnet" "public" {
-  count = 2
+  count = 3
   vpc_id = "${aws_vpc.default.id}"
   cidr_block = "${lookup(var.public_cidrs, concat("zone", count.index))}"
   availability_zone = "${lookup(var.availability_zones, concat("zone", count.index))}"

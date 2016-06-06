@@ -1,5 +1,5 @@
 resource "aws_subnet" "private" {
-  count = 2
+  count = 3
   vpc_id = "${aws_vpc.default.id}"
   cidr_block = "${lookup(var.private_cidrs, concat("zone", count.index))}"
   availability_zone = "${lookup(var.availability_zones, concat("zone", count.index))}"
