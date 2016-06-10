@@ -23,6 +23,19 @@ resource "aws_s3_bucket" "assets" {
   force_destroy = "${var.force_destroy}"
   policy = "${template_file.s3_assets_bucket_policy.rendered}"
 
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET"]
+    allowed_origins = [
+      "https://pingli.st",
+      "https://www.pingli.st",
+      "https://*.pingli.st",
+      "https://www.*.pingli.st"
+    ]
+    expose_headers = ["ETag"]
+    max_age_seconds = 3000
+  }
+
   tags {
     Name = "S3 bucket for assets"
     Environment = "${var.env}"
