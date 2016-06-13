@@ -6,7 +6,9 @@
         "s3:*"
       ],
       "Effect": "Allow",
-      "Resource": "*"
+      "Resource": [
+        "*"
+      ]
     }
   ]
 }

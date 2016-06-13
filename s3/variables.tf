@@ -13,6 +13,16 @@ variable "vpc_id" {
   description = "VPC ID"
 }
 
+variable "api_iam_role_arn" {
+  type        = "string"
+  description = "API IAM role ARN"
+}
+
+variable "app_iam_role_arn" {
+  type        = "string"
+  description = "Web app IAM role ARN"
+}
+
 variable "private_route_table" {
   type        = "string"
   description = "Private route table"

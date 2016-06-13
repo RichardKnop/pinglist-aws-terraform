@@ -63,16 +63,6 @@ module "api" {
   dns_zone_name = "${var.dns_zone_name}"
 }
 
-module "s3" {
-  source = "./s3"
-
-  env = "${var.env}"
-  region = "${var.region}"
-  vpc_id = "${module.vpc.vpc_id}"
-  private_route_table = "${module.vpc.private_route_table}"
-  force_destroy = "${var.force_destroy}"
-}
-
 module "app" {
   source = "./app"
 
@@ -95,4 +85,16 @@ module "app" {
   etcd_host = "${module.etcd.dns_name}"
   dns_zone_id = "${var.dns_zone_id}"
   dns_zone_name = "${var.dns_zone_name}"
+}
+
+module "s3" {
+  source = "./s3"
+
+  env = "${var.env}"
+  region = "${var.region}"
+  vpc_id = "${module.vpc.vpc_id}"
+  api_iam_role_arn = "${module.api.api_iam_role_arn}"
+  app_iam_role_arn = "${module.app.app_iam_role_arn}"
+  private_route_table = "${module.vpc.private_route_table}"
+  force_destroy = "${var.force_destroy}"
 }

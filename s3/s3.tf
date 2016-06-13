@@ -14,6 +14,13 @@ resource "template_file" "s3_assets_bucket_policy" {
 
   vars {
     env = "${var.env}"
+    vpc_id = "${var.vpc_id}"
+    api_iam_role_arn = "${var.api_iam_role_arn}"
+    app_iam_role_arn = "${var.app_iam_role_arn}"
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
@@ -39,5 +46,9 @@ resource "aws_s3_bucket" "assets" {
   tags {
     Name = "S3 bucket for assets"
     Environment = "${var.env}"
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }

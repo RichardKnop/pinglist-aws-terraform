@@ -1,40 +1,61 @@
 {
   "Version": "2012-10-17",
-  "Statement": [{
-    "Sid": "Allow access from our domains",
-    "Effect": "Allow",
-    "Principal": {
-      "AWS": "*"
-    },
-    "Action": "s3:GetObject",
-    "Resource": "arn:aws:s3:::${env}.pinglist.assets/*",
-    "Condition": {
-      "StringLike": {
-        "aws:Referer": [
-          "https://pingli.st/*",
-          "https://www.pingli.st/*",
-          "https://*.pingli.st/*",
-          "https://www.*.pingli.st/*"
+  "Statement": [
+    {
+      "Sid": "Allow full access to IAM roles defined for our services",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": [
+          "${api_iam_role_arn}",
+          "${app_iam_role_arn}"
         ]
+      },
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::${env}.pinglist.assets",
+        "arn:aws:s3:::${env}.pinglist.assets/*"
+      ]
+    },
+    {
+      "Sid": "Allow access from our domains",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "*"
+      },
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::${env}.pinglist.assets/*",
+      "Condition": {
+        "StringLike": {
+          "aws:Referer": [
+            "https://pingli.st/*",
+            "https://www.pingli.st/*",
+            "https://*.pingli.st/*",
+            "https://www.*.pingli.st/*"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "Deny access from other domains",
+      "Effect": "Deny",
+      "Principal": {
+        "AWS": "*"
+      },
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::${env}.pinglist.assets/*",
+      "Condition": {
+        "StringNotLike": {
+          "aws:Referer": [
+            "https://pingli.st/*",
+            "https://www.pingli.st/*",
+            "https://*.pingli.st/*",
+            "https://www.*.pingli.st/*"
+          ]
+        },
+        "StringNotEquals": {
+          "aws:sourceVpc": "${vpc_id}"
+        }
       }
     }
-  }, {
-    "Sid": "Deny access from other domains",
-    "Effect": "Deny",
-    "Principal": {
-      "AWS": "*"
-    },
-    "Action": "s3:GetObject",
-    "Resource": "arn:aws:s3:::${env}.pinglist.assets/*",
-    "Condition": {
-      "StringNotLike": {
-        "aws:Referer": [
-          "https://pingli.st/*",
-          "https://www.pingli.st/*",
-          "https://*.pingli.st/*",
-          "https://www.*.pingli.st/*"
-        ]
-      }
-    }
-  }]
+  ]
 }
