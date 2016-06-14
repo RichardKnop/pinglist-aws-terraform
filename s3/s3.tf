@@ -13,6 +13,7 @@ resource "template_file" "s3_assets_bucket_policy" {
   template = "${file("${path.module}/templates/s3-assets-bucket-policy.json")}"
 
   vars {
+    region = "${var.region}"
     env = "${var.env}"
     vpc_id = "${var.vpc_id}"
     api_iam_role_arn = "${var.api_iam_role_arn}"
@@ -37,7 +38,8 @@ resource "aws_s3_bucket" "assets" {
       "https://pingli.st",
       "https://www.pingli.st",
       "https://*.pingli.st",
-      "https://www.*.pingli.st"
+      "https://www.*.pingli.st",
+      "https://s3-${var.region}.amazonaws.com/${var.env}.pinglist.assets/*"
     ]
     expose_headers = ["ETag"]
     max_age_seconds = 3000
