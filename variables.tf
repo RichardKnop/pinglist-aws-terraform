@@ -90,7 +90,7 @@ variable "api_min_size" {
 
   default     = {
     stage = 1
-    prod  = 2
+    prod  = 1
   }
 }
 
@@ -100,7 +100,7 @@ variable "api_max_size" {
 
   default     = {
     stage = 2
-    prod  = 4
+    prod  = 2
   }
 }
 
