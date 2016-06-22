@@ -19,6 +19,8 @@ write_files:
       curl -s -H "Date: $date" -H "X-AMZ-Security-Token: $token" -H "Authorization: $authorization" "https://s3-${region}.amazonaws.com/$resource"
 
 coreos:
+  update:
+    reboot-strategy: off
   units:
     - name: get-release.service
       command: start
