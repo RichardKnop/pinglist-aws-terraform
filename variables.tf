@@ -201,8 +201,8 @@ variable "app_prefix" {
   description = "Prefix for web app based on environment"
 
   default     = {
-    stage = "stage-app."
-    prod  = "app."
+    stage = "stage."
+    prod  = ""
   }
 }
 
