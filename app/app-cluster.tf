@@ -65,6 +65,18 @@ resource "aws_autoscaling_group" "app" {
     value = "${var.env}-pinglist-app"
     propagate_at_launch = true
   }
+
+  tag {
+    key = "Environment"
+    value = "${var.env}"
+    propagate_at_launch = true
+  }
+
+  tag {
+    key = "Role"
+    value = "app"
+    propagate_at_launch = true
+  }
 }
 
 resource "aws_autoscaling_policy" "app_scale_up" {
