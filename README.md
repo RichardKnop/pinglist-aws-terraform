@@ -5,6 +5,12 @@
 
 Terraform manifests to build Pinglist AWS infrastructure.
 
+See also:
+- [pinglist-aws-ansible](https://github.com/RichardKnop/pinglist-aws-ansible)
+- [pinglist-api](https://github.com/RichardKnop/pinglist-api)
+- [pinglist-app](https://github.com/RichardKnop/pinglist-app)
+- [pinglist-ios-app](https://github.com/RichardKnop/pinglist-ios-app)
+
 # Index
 
 * [Pinglist AWS Terraform](#pinglist-aws-terraform)
